@@ -3,27 +3,25 @@
 
 * {
   font-family: "Roboto Flex", sans-serif;
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
-@theme {
-  /* BG colors*/
-  --color-bg-primary-dark: #1e2d1e;
-  --color-bg-secondary-dark: #2a3c2a;
-  --color-bg-primary-light: #7fbf7f;
-  --color-bg-secondary-light: #d3ead3;
-  --color-bg-hover-dark: #396239;
-  --color-bg-hover-light: #6cd46c;
+body {
+  width: 80%;
+  margin: auto;
+}
+
+/* DEFAULT (light theme) */
+:root {
+  /* BG colors */
+  --color-bg-primary: #7fbf7f;
+  --color-bg-secondary: #d3ead3;
+  --color-bg-hover: #6cd46c;
 
   /* TEXT colors */
-  --color-text-primary-dark: #cdd6c4;
-  --color-text-secondary-dark: #a8b59f;
-  --color-text-primary-light: #1f321f;
-  --color-text-secondary-light: #386038;
-  --color-text-hover-dark: #e4ebd9;
-  --color-text-hover-light: #2a321a;
+  --color-text-primary: #1f321f;
+  --color-text-secondary: #386038;
+  --color-text-hover: #2a321a;
 
   /* BUTTON colors */
   --color-btn-bg: #d4a017;
@@ -43,4 +41,20 @@
 
   --text-caption-md: 0.75rem;
   --text-caption-sm: 0.625rem;
+}
+
+/* DARK theme */
+.dark {
+  --color-bg-primary: #1e2d1e;
+  --color-bg-secondary: #2a3c2a;
+  --color-bg-hover: #396239;
+
+  --color-text-primary: #cdd6c4;
+  --color-text-secondary: #a8b59f;
+  --color-text-hover: #e4ebd9;
+
+  --color-btn-bg: #d4a017;
+  --color-btn-text: #ffffff;
+  --color-btn-bg-hover: #a0740f;
+  --color-btn-text-hover: #ffffff;
 }
