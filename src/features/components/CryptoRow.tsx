@@ -1,7 +1,17 @@
 import { FaRegStar } from "react-icons/fa6";
 import type { CryptoRowProps } from "../types";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CryptoItem = ({ item, index, currency }: CryptoRowProps) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const openModal = (id: string) => {
+    navigate(`/modal/${id}`, {
+      state: { backgroundLocation: location },
+    });
+  };
+
   return (
     <tr
       className={`${
@@ -13,7 +23,10 @@ const CryptoItem = ({ item, index, currency }: CryptoRowProps) => {
       <th className="flex justify-start items-center m-auto my-2 pl-6">
         {<FaRegStar className="text-xl mr-4 cursor-pointer" />}
         <img src={item.image} alt="image" className="w-5 mr-1" />
-        <span className="uppercase font-bold cursor-pointer">
+        <span
+          onClick={() => openModal(item.id)}
+          className="uppercase font-bold cursor-pointer"
+        >
           {item.symbol}
         </span>
       </th>

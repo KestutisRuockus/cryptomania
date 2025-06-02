@@ -16,11 +16,11 @@ const Header = () => {
       className="w-full flex justify-between items-center px-4"
       style={{ backgroundColor: "var(--color-bg-primary)" }}
     >
-      <img src={logo} alt="logo" className="w-16 z-50" />
+      <img src={logo} alt="logo" className="w-16 z-20" />
       <nav
         className={`flex flex-col md:flex-row gap-2 md:gap-6 items-end md:items-center md:justify-end pr-24 md:px-6 w-4/5 md:w-fit py-12 md:p-2 absolute md:static ${
           isModalOpen ? "top-0" : "top-[-100%]"
-        } right-[10%] transition-all duration-300 ease-in bg-[var(--color-bg-primary)] rounded-b-md md:rounded-md`}
+        } right-[10%] transition-all duration-300 ease-in bg-[var(--color-bg-primary)] rounded-b-md md:rounded-md z-50`}
         style={{
           backgroundColor: "var(--color-bg-secondary)",
           fontSize: "var(--text-body-md)",
@@ -30,6 +30,7 @@ const Header = () => {
           <NavLink
             key={path}
             to={path}
+            onClick={toggleModalWindow}
             className={({ isActive }) =>
               `
       ${isActive ? "bg-[var(--color-bg-primary)]" : ""}
