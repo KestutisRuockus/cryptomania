@@ -18,8 +18,10 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const updateHtmlClass = (theme: Theme) => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
+      document.body.style.backgroundColor = "var(--color-bg-body)";
     } else {
       document.documentElement.classList.remove("dark");
+      document.body.style.backgroundColor = "var(--color-bg-body)";
     }
   };
 

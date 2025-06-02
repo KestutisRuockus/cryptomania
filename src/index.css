@@ -14,20 +14,21 @@ body {
 /* DEFAULT (light theme) */
 :root {
   /* BG colors */
-  --color-bg-primary: #7fbf7f;
-  --color-bg-secondary: #d3ead3;
-  --color-bg-hover: #6cd46c;
+  --color-bg-primary: #b1c9ef;
+  --color-bg-secondary: #d5deef;
+  --color-bg-hover: #395886;
+  --color-bg-body: #e0fbfc;
 
   /* TEXT colors */
-  --color-text-primary: #1f321f;
-  --color-text-secondary: #386038;
-  --color-text-hover: #2a321a;
+  --color-text-primary: #230462;
+  --color-text-secondary: #203590;
+  --color-text-hover: #d5deef;
 
   /* BUTTON colors */
-  --color-btn-bg: #d4a017;
-  --color-btn-text: #ffffff;
-  --color-btn-bg-hover: #a0740f;
-  --color-btn-text-hover: #ffffff;
+  --color-btn-bg: #00b4d8;
+  --color-btn-text: #03045e;
+  --color-btn-bg-hover: #a983d8;
+  --color-btn-text-hover: #023047;
 
   /* TEXT size */
   --text-heading-xl: 2.5rem;
@@ -45,16 +46,17 @@ body {
 
 /* DARK theme */
 .dark {
-  --color-bg-primary: #1e2d1e;
-  --color-bg-secondary: #2a3c2a;
-  --color-bg-hover: #396239;
+  --color-bg-primary: #1c1c1c;
+  --color-bg-secondary: #004d61;
+  --color-bg-hover: #a8dadc;
+  --color-bg-body: #333333;
 
-  --color-text-primary: #cdd6c4;
-  --color-text-secondary: #a8b59f;
-  --color-text-hover: #e4ebd9;
+  --color-text-primary: #f0f0f0;
+  --color-text-secondary: #ffc1cc;
+  --color-text-hover: #ff4500;
 
-  --color-btn-bg: #d4a017;
-  --color-btn-text: #ffffff;
-  --color-btn-bg-hover: #a0740f;
-  --color-btn-text-hover: #ffffff;
+  --color-btn-bg: #002837;
+  --color-btn-text: #cedfdf;
+  --color-btn-bg-hover: #a8dadc;
+  --color-btn-text-hover: #ff4500;
 }

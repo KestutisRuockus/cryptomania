@@ -1,5 +1,11 @@
+import CryptoTable from "../features/components/CryptoTable";
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <main>
+      <CryptoTable />
+    </main>
+  );
 };
 
 export default Home;
