@@ -4,11 +4,10 @@ import logo from "/logo.jpg";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaWindowClose } from "react-icons/fa";
 import { useState } from "react";
-import { useTheme } from "../../context/ThemeContext";
+import SwitchThemeButton from "../ui/SwitchThemeButton";
 
 const Header = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const { toggleTheme } = useTheme();
 
   const toggleModalWindow = () => setIsModalOpen(!isModalOpen);
 
@@ -45,9 +44,7 @@ const Header = () => {
             {label}
           </NavLink>
         ))}
-        {/*  */}
-        <button onClick={toggleTheme}>Switch Theme Color</button>
-        {/*  */}
+        <SwitchThemeButton />
       </nav>
       <span
         onClick={toggleModalWindow}
