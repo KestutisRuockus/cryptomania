@@ -42,25 +42,28 @@ const CryptoItem = ({ item, index, currency }: CryptoRowProps) => {
             : "text-red-600"
         } hidden lg:table-cell`}
       >
-        {item.price_change_percentage_1h_in_currency + "%"}
+        {item.price_change_percentage_1h_in_currency.toFixed(2) + "%"}
       </th>
       <th
         className={`${
-          item.price_change_percentage_24h >= 0
+          item.price_change_percentage_24h_in_currency >= 0
             ? "text-green-600"
             : "text-red-600"
         } hidden lg:table-cell`}
       >
-        {item.price_change_percentage_24h + "%"}
+        {item.price_change_percentage_24h_in_currency.toFixed(2) + "%"}
       </th>
       <th
         className={`${
+          item.price_change_percentage_7d_in_currency &&
           item.price_change_percentage_7d_in_currency >= 0
             ? "text-green-600"
             : "text-red-600"
         } hidden lg:table-cell`}
       >
-        {item.price_change_percentage_7d_in_currency + "%"}
+        {item.price_change_percentage_7d_in_currency !== undefined
+          ? item.price_change_percentage_7d_in_currency.toFixed(2) + "%"
+          : "-"}
       </th>
     </tr>
   );
