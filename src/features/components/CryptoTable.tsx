@@ -1,6 +1,8 @@
 import { useState } from "react";
 import CryptoRow from "./CryptoRow";
+import Pagination from "../../components/ui/Pagination";
 import useCoinsList from "../../hooks/useCoinsList";
+
 // const list = [
 //   {
 //     id: "bitcoin",
@@ -12,7 +14,7 @@ import useCoinsList from "../../hooks/useCoinsList";
 //     market_cap_rank: 1,
 //     total_volume: 35000000000,
 //     price_change_percentage_1h_in_currency: 0.21,
-//     price_change_percentage_24h: 1.95,
+//     price_change_percentage_24h_in_currency: 1.95,
 //     price_change_percentage_7d_in_currency: 0.95,
 //   },
 //   {
@@ -26,7 +28,7 @@ import useCoinsList from "../../hooks/useCoinsList";
 //     total_volume: 11000000000,
 //     circulating_supply: 120000000,
 //     price_change_percentage_1h_in_currency: -0.12,
-//     price_change_percentage_24h: -0.01,
+//     price_change_percentage_24h_in_currency: -0.01,
 //     price_change_percentage_7d_in_currency: -0.48,
 //   },
 // ];
@@ -34,9 +36,9 @@ import useCoinsList from "../../hooks/useCoinsList";
 const CryptoList = () => {
   const [currency] = useState<string>("€");
 
-  const [page] = useState<number>(1);
-  const { coinsList, loading } = useCoinsList(page);
-  console.log(coinsList);
+  const [page, setPage] = useState<number>(1);
+  const [perPage] = useState<number>(10);
+  const { coinsList, loading, hasMore } = useCoinsList(page, perPage);
 
   return (
     <section
@@ -73,6 +75,9 @@ const CryptoList = () => {
             ))}
         </tbody>
       </table>
+      {!loading && (
+        <Pagination page={page} setPage={setPage} hasMore={hasMore} />
+      )}
     </section>
   );
 };

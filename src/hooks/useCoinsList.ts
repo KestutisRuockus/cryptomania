@@ -2,9 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import type { CoinListItem } from "../features/types";
 
-const useCoinsList = (page: number, perPage: number = 10) => {
+const useCoinsList = (page: number, perPage: number) => {
   const [coinsList, setCoinsList] = useState<CoinListItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [hasMore, setHasMore] = useState<boolean>(true);
   const [error, setError] = useState<null | string>(null);
 
   useEffect(() => {
@@ -26,6 +27,7 @@ const useCoinsList = (page: number, perPage: number = 10) => {
             },
           }
         );
+        setHasMore(result.data.length === perPage);
         setCoinsList(result.data);
       } catch (error) {
         setError("Failed to fetch coins. " + error);
@@ -37,7 +39,7 @@ const useCoinsList = (page: number, perPage: number = 10) => {
     fetchCoins();
   }, [page, perPage]);
 
-  return { coinsList, loading, error };
+  return { coinsList, loading, error, hasMore };
 };
 
 export default useCoinsList;
