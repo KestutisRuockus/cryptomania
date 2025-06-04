@@ -60,3 +60,19 @@ body {
   --color-btn-bg-hover: #a8dadc;
   --color-btn-text-hover: #ff4500;
 }
+
+.spinner {
+  width: 100px;
+  height: 100px;
+  margin: 50px;
+  border: 12px solid rgba(0, 0, 0, 0.2);
+  border-top-color: var(--color-text-secondary);
+  border-radius: 50%;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CryptoRow from "./CryptoRow";
 import Pagination from "../../components/ui/Pagination";
+import LoadingSpinner from "../../components/ui/LoadingSpinner";
 import useCoinsList from "../../hooks/useCoinsList";
 
 // const list = [
@@ -43,7 +44,7 @@ const CryptoList = () => {
   return (
     <section
       aria-label="Cryptocurrency List"
-      className="flex flex-col items-end"
+      className={`flex flex-col ${loading ? "items-center" : "items-end"}`}
     >
       <h2 className="hidden">Cryptocurrency List</h2>
       <table className="table-auto w-full lg:w-4/5 m-auto mt-16">
@@ -59,11 +60,6 @@ const CryptoList = () => {
           </tr>
         </thead>
         <tbody className="border-2 border-slate-600">
-          {loading && (
-            <tr>
-              <th>Loading...</th>
-            </tr>
-          )}
           {!loading &&
             coinsList.map((item, index) => (
               <CryptoRow
@@ -75,6 +71,7 @@ const CryptoList = () => {
             ))}
         </tbody>
       </table>
+      {loading && <LoadingSpinner />}
       {!loading && (
         <Pagination page={page} setPage={setPage} hasMore={hasMore} />
       )}
