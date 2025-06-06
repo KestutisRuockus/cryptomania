@@ -26,3 +26,29 @@ export type CoinListItem = {
   price_change_percentage_24h_in_currency: number;
   price_change_percentage_7d_in_currency?: number;
 };
+
+type CurrencyMap = {
+  [currencyCode: string]: number; // e.g. { usd: 27000, eur: 25000, ... }
+};
+
+export type CoinItemInModal = CoinListItem & {
+  market_data: {
+    current_price: CurrencyMap;
+    low_24h: CurrencyMap;
+    high_24h: CurrencyMap;
+    market_cap: CurrencyMap;
+    total_volume: CurrencyMap;
+    max_supply: string;
+    circulating_supply: number;
+  };
+  links: {
+    homepage: string[];
+    official_forum_url: string[];
+  };
+  market_cap_rank: number;
+  coingecko_rank: number;
+  coingecko_score: number;
+  image: {
+    small: string;
+  };
+};
