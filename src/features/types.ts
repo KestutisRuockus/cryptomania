@@ -28,7 +28,7 @@ export type CoinListItem = {
 };
 
 type CurrencyMap = {
-  [currencyCode: string]: number; // e.g. { usd: 27000, eur: 25000, ... }
+  [currencyCode: string]: number;
 };
 
 export type CoinItemInModal = CoinListItem & {
@@ -51,4 +51,13 @@ export type CoinItemInModal = CoinListItem & {
   image: {
     small: string;
   };
+};
+
+export type TrendingCoin = {
+  id: string;
+  name: string;
+  market_cap_rank: number;
+  price_btc: number;
+  thumb: string;
+  score: number;
 };

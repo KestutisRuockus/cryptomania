@@ -76,3 +76,18 @@ body {
     transform: rotate(360deg);
   }
 }
+
+@media screen {
+}
+
+@media only screen and (max-width: 1440px) {
+  body {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    width: 95%;
+  }
+}

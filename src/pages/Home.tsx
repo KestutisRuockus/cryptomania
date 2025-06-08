@@ -2,9 +2,9 @@ import CryptoTable from "../features/components/CryptoTable";
 
 const Home = () => {
   return (
-    <main>
+    <section>
       <CryptoTable />
-    </main>
+    </section>
   );
 };
 

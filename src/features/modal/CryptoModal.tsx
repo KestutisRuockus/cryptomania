@@ -59,8 +59,8 @@ const CryptoModal = () => {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-4">
-              <dl className="w-full flex flex-col gap-4 sm:pl-6">
+            <div className="flex flex-col md:flex-row gap-4 w-full">
+              <dl className="w-full md:w-2/5 flex flex-col gap-4 sm:pl-6">
                 <div className="flex flex-col">
                   <dt className="font-medium p-0 text-[var(--color-text-secondary)]">
                     Price
@@ -186,9 +186,9 @@ const CryptoModal = () => {
                   </div>
                 </div>
               </dl>
-              <div className="w-full 2xl:w-3/5 flex flex-col justify-between gap-4">
+              <div className="w-full 2xl:w-4/5 flex flex-col justify-between gap-4">
                 <div className="w-full h-[300px]">
-                  <Chart />
+                  <Chart coinId={coinData.id} />
                 </div>
                 <div className="w-full flex flex-col gap-4 justify-start items-start sm:pl-6">
                   <div className="flex flex-col gap-4 justify-center w-full md:w-3/5 2xl:w-full">
@@ -265,24 +265,6 @@ const CryptoModal = () => {
                         className="font-bold text-[var(--color-text-primary)]"
                       >
                         {coinData.market_cap_rank}
-                      </span>
-                    </p>
-                    <p className="font-semibold text-[var(--color-text-secondary)]">
-                      CoinGecko Rank:{" "}
-                      <span
-                        style={{ fontSize: "var(--text-heading-md)" }}
-                        className="font-bold text-[var(--color-text-primary)]"
-                      >
-                        {coinData.coingecko_rank}
-                      </span>
-                    </p>
-                    <p className="font-semibold text-[var(--color-text-secondary)]">
-                      CoinGecko Score:{" "}
-                      <span
-                        style={{ fontSize: "var(--text-heading-md)" }}
-                        className="font-bold text-[var(--color-text-primary)]"
-                      >
-                        {coinData.coingecko_score}
                       </span>
                     </p>
                   </div>
