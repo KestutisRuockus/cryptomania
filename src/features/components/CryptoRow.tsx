@@ -30,24 +30,28 @@ const CryptoItem = ({ item, index, currency }: CryptoRowProps) => {
         {item.name}
       </th>
       <th>{currency + item.current_price}</th>
-      <th className="hidden sm:table-cell">{item.total_volume}</th>
+      <th className="hidden xl:table-cell">{item.total_volume}</th>
       <th
         className={`${
           item.price_change_percentage_1h_in_currency >= 0
             ? "text-green-600"
             : "text-red-600"
-        } hidden lg:table-cell`}
+        } hidden xl:table-cell`}
       >
-        {item.price_change_percentage_1h_in_currency.toFixed(2) + "%"}
+        {item.price_change_percentage_1h_in_currency
+          ? item.price_change_percentage_1h_in_currency + "%"
+          : "-"}
       </th>
       <th
         className={`${
           item.price_change_percentage_24h_in_currency >= 0
             ? "text-green-600"
             : "text-red-600"
-        } hidden lg:table-cell`}
+        } hidden md:table-cell`}
       >
-        {item.price_change_percentage_24h_in_currency.toFixed(2) + "%"}
+        {item.price_change_percentage_24h_in_currency
+          ? item.price_change_percentage_24h_in_currency + "%"
+          : "-"}
       </th>
       <th
         className={`${
@@ -57,8 +61,8 @@ const CryptoItem = ({ item, index, currency }: CryptoRowProps) => {
             : "text-red-600"
         } hidden lg:table-cell`}
       >
-        {item.price_change_percentage_7d_in_currency !== undefined
-          ? item.price_change_percentage_7d_in_currency.toFixed(2) + "%"
+        {item.price_change_percentage_7d_in_currency
+          ? item.price_change_percentage_7d_in_currency + "%"
           : "-"}
       </th>
     </tr>
@@ -66,3 +70,4 @@ const CryptoItem = ({ item, index, currency }: CryptoRowProps) => {
 };
 
 export default CryptoItem;
+// toFixed(2)

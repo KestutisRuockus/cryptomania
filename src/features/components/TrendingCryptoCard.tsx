@@ -14,7 +14,7 @@ const TrendingCryptoCard = ({ coin }: { coin: TrendingCoin }) => {
   return (
     <div
       onClick={() => openModal(coin.id)}
-      className="w-full flex flex-col gap-2 bg-[var(--color-bg-primary)] p-6 rounded-lg relative cursor-pointer"
+      className="w-full flex flex-col gap-2 bg-[var(--color-bg-primary)] p-6 rounded-lg relative cursor-pointer hover:opacity-70 transition-opacity duration-300"
     >
       <div className="flex max-[360px]:flex-col gap-1 items-start">
         <h2 className="text-[var(--color-text-primary)]">Name:</h2>
@@ -42,7 +42,7 @@ const TrendingCryptoCard = ({ coin }: { coin: TrendingCoin }) => {
         </span>
       </div>
       <div className="flex gap-1 items-start">
-        <p className="text-[var(--color-text-primary)]">Score:</p>
+        <p className="text-[var(--color-text-primary)]">Trending Rank:</p>
         <span className="text-[var(--color-text-secondary)] font-bold">
           {coin.score + 1}
         </span>
