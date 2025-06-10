@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import type { CoinListItem } from "../features/types";
+import { FilterBarContext } from "../context/FilterBarContext";
 
 type SearchResultCoin = {
   id: string;
@@ -20,6 +21,14 @@ const useSearchCoinsbyQuery = (searchQuery: string) => {
   const [searchError, setSearchError] = useState<string | null>(null);
   const [noSearchResults, setNoSearchResults] = useState<boolean>(false);
   const limitOfItemsperSearch = 10;
+
+  const filterContext = useContext(FilterBarContext);
+  if (!filterContext) {
+    throw new Error(
+      "useFilterBarContext must be used within FilterBarProvider"
+    );
+  }
+  const { currency } = filterContext;
 
   useEffect(() => {
     const fetchCoins = async () => {
@@ -58,7 +67,7 @@ const useSearchCoinsbyQuery = (searchQuery: string) => {
           `https://api.coingecko.com/api/v3/coins/markets`,
           {
             params: {
-              vs_currency: "usd",
+              vs_currency: currency,
               ids,
               order: "market_cap_desc",
               sparkline: false,
@@ -76,7 +85,7 @@ const useSearchCoinsbyQuery = (searchQuery: string) => {
     };
 
     fetchCoins();
-  }, [searchQuery]);
+  }, [searchQuery, currency]);
 
   return { coinsListBySearchQuery, isSearching, searchError, noSearchResults };
 };

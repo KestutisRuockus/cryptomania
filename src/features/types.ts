@@ -1,3 +1,5 @@
+import type { popularCurrencies } from "../data/currenciesList";
+
 type CryptoRowItemProps = {
   id: string;
   symbol: string;
@@ -61,3 +63,5 @@ export type TrendingCoin = {
   thumb: string;
   score: number;
 };
+
+export type CurrencyCode = (typeof popularCurrencies)[number]["code"];

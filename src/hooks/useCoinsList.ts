@@ -1,12 +1,21 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import type { CoinListItem } from "../features/types";
+import { FilterBarContext } from "../context/FilterBarContext";
 
-const useCoinsList = (page: number, perPage: number) => {
+const useCoinsList = () => {
   const [coinsList, setCoinsList] = useState<CoinListItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [error, setError] = useState<null | string>(null);
+
+  const filterContext = useContext(FilterBarContext);
+  if (!filterContext) {
+    throw new Error(
+      "useFilterBarContext must be used within FilterBarProvider"
+    );
+  }
+  const { page, perPage, currency } = filterContext;
 
   useEffect(() => {
     const fetchCoins = async () => {
@@ -18,7 +27,7 @@ const useCoinsList = (page: number, perPage: number) => {
           "https://api.coingecko.com/api/v3/coins/markets",
           {
             params: {
-              vs_currency: "usd",
+              vs_currency: currency,
               order: "market_desc_cap",
               per_page: perPage,
               page: page,
@@ -37,7 +46,7 @@ const useCoinsList = (page: number, perPage: number) => {
     };
 
     fetchCoins();
-  }, [page, perPage]);
+  }, [page, perPage, currency]);
 
   return { coinsList, loading, error, hasMore };
 };

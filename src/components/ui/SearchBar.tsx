@@ -37,7 +37,7 @@ const SearchBar = () => {
           }}
           value={inputValue}
           placeholder="Search here..."
-          className="w-full border-2 border-[var(--color-bg-primary)] py-1 pl-2 pr-7 rounded-lg min-w-3xs outline-none text-[var(--color-text-primary)]"
+          className="w-full min-w-3xs border-2 border-[var(--color-bg-primary)] py-1 pl-2 pr-7 rounded-lg outline-none text-[var(--color-text-primary)]"
         />
         <IoMdSearch
           onClick={handleInputSubmit}

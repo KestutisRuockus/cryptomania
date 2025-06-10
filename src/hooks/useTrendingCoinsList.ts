@@ -17,7 +17,6 @@ const useTrendinigCoinsList = () => {
           "https://api.coingecko.com/api/v3/search/trending",
           {
             params: {
-              vs_currency: "usd",
               order: "market_desc_cap",
             },
           }

@@ -6,6 +6,8 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import Chart from "./Chart";
 import useCoinbyId from "../../hooks/useCoinById";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
+import { useContext } from "react";
+import { FilterBarContext } from "../../context/FilterBarContext";
 
 const CryptoModal = () => {
   const { theme } = useTheme();
@@ -16,6 +18,14 @@ const CryptoModal = () => {
   const { id } = useParams();
   const safeId = id ?? "";
   const { coinData, loading } = useCoinbyId(safeId);
+
+  const filterContext = useContext(FilterBarContext);
+  if (!filterContext) {
+    throw new Error(
+      "useFilterBarContext must be used within FilterBarProvider"
+    );
+  }
+  const { currency } = filterContext;
 
   let currentPriceLinearPercentage;
   if (coinData) {
@@ -71,8 +81,10 @@ const CryptoModal = () => {
                   >
                     {new Intl.NumberFormat("en-US", {
                       style: "currency",
-                      currency: "USD",
-                    }).format(coinData.market_data.current_price.usd)}
+                      currency: currency.toUpperCase(),
+                    }).format(
+                      coinData.market_data.current_price[currency] ?? 0
+                    )}
                   </dd>
                 </div>
                 <div className="flex flex-col">
@@ -85,8 +97,8 @@ const CryptoModal = () => {
                   >
                     {new Intl.NumberFormat("en-US", {
                       style: "currency",
-                      currency: "USD",
-                    }).format(coinData.market_data.market_cap.usd)}
+                      currency: currency.toUpperCase(),
+                    }).format(coinData.market_data.market_cap[currency] ?? 0)}
                   </dd>
                 </div>
                 <div className="flex flex-col">
@@ -99,8 +111,8 @@ const CryptoModal = () => {
                   >
                     {new Intl.NumberFormat("en-US", {
                       style: "currency",
-                      currency: "USD",
-                    }).format(coinData.market_data.total_volume.usd)}
+                      currency: currency.toUpperCase(),
+                    }).format(coinData.market_data.total_volume[currency] ?? 0)}
                   </dd>
                 </div>
                 <div className="flex w-1/2 md:w-full h-2 rounded-full overflow-hidden">
@@ -136,8 +148,8 @@ const CryptoModal = () => {
                     >
                       {new Intl.NumberFormat("en-US", {
                         style: "currency",
-                        currency: "USD",
-                      }).format(coinData.market_data.low_24h.usd)}
+                        currency: currency.toUpperCase(),
+                      }).format(coinData.market_data.low_24h[currency] ?? 0)}
                     </dd>
                   </div>
                   <div className="flex flex-col">
@@ -150,8 +162,8 @@ const CryptoModal = () => {
                     >
                       {new Intl.NumberFormat("en-US", {
                         style: "currency",
-                        currency: "USD",
-                      }).format(coinData.market_data.high_24h.usd)}
+                        currency: currency.toUpperCase(),
+                      }).format(coinData.market_data.high_24h[currency] ?? 0)}
                     </dd>
                   </div>
                 </div>
@@ -166,7 +178,7 @@ const CryptoModal = () => {
                     >
                       {new Intl.NumberFormat("en-US", {
                         style: "currency",
-                        currency: "USD",
+                        currency: currency.toUpperCase(),
                       }).format(+coinData.market_data.max_supply)}
                     </dd>
                   </div>
@@ -180,7 +192,7 @@ const CryptoModal = () => {
                     >
                       {new Intl.NumberFormat("en-US", {
                         style: "currency",
-                        currency: "USD",
+                        currency: currency.toUpperCase(),
                       }).format(coinData.market_data.circulating_supply)}
                     </dd>
                   </div>

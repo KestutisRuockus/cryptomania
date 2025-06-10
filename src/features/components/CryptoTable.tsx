@@ -1,24 +1,25 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import CryptoRow from "./CryptoRow";
 import Pagination from "../../components/ui/Pagination";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
 import useCoinsList from "../../hooks/useCoinsList";
 import { FilterBarContext } from "../../context/FilterBarContext";
 import useSearchCoinsbyQuery from "../../hooks/useSeachCoinsByQuery";
+import { popularCurrencies } from "../../data/currenciesList";
 
 const CryptoList = () => {
-  const [currency] = useState<string>("€");
-
   const filterContext = useContext(FilterBarContext);
   if (!filterContext) {
     throw new Error(
       "useFilterBarContext must be used within FilterBarProvider"
     );
   }
-  const { page, setPage, perPage, searchQuery } = filterContext;
-  const { coinsList, loading, hasMore } = useCoinsList(page, perPage);
+  const { page, setPage, searchQuery, currency } = filterContext;
+  const { coinsList, loading, hasMore } = useCoinsList();
   const { coinsListBySearchQuery, isSearching, noSearchResults } =
     useSearchCoinsbyQuery(searchQuery);
+  const currencySymbol =
+    popularCurrencies.find((item) => item.code === currency)?.symbol ?? "";
 
   const isSearchingActive = searchQuery.trim().length > 0;
   const finalList = isSearchingActive ? coinsListBySearchQuery : coinsList;
@@ -61,7 +62,7 @@ const CryptoList = () => {
                 key={item.id}
                 item={item}
                 index={index}
-                currency={currency}
+                currency={currencySymbol}
               />
             ))}
         </tbody>

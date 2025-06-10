@@ -4,14 +4,17 @@ import {
   type Dispatch,
   type SetStateAction,
 } from "react";
+import type { CurrencyCode } from "../features/types";
 
 export type FilterBarContextType = {
   searchQuery: string;
-  setSearchQuery: (query: string) => void;
+  setSearchQuery: Dispatch<SetStateAction<string>>;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
   perPage: number;
   setPerPage: (perPage: number) => void;
+  currency: CurrencyCode;
+  setCurrency: Dispatch<SetStateAction<CurrencyCode>>;
 };
 
 export const FilterBarContext = createContext<FilterBarContextType | undefined>(
