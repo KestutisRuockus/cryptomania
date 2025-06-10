@@ -6,6 +6,7 @@ import useCoinsList from "../../hooks/useCoinsList";
 import { FilterBarContext } from "../../context/FilterBarContext";
 import useSearchCoinsbyQuery from "../../hooks/useSeachCoinsByQuery";
 import { popularCurrencies } from "../../data/currenciesList";
+import { useSavedCoins } from "../../hooks/useSavedCoins";
 
 const CryptoList = () => {
   const filterContext = useContext(FilterBarContext);
@@ -20,6 +21,7 @@ const CryptoList = () => {
     useSearchCoinsbyQuery(searchQuery);
   const currencySymbol =
     popularCurrencies.find((item) => item.code === currency)?.symbol ?? "";
+  const { isSavedCoinId, toggleSavedStatus } = useSavedCoins();
 
   const isSearchingActive = searchQuery.trim().length > 0;
   const finalList = isSearchingActive ? coinsListBySearchQuery : coinsList;
@@ -63,6 +65,8 @@ const CryptoList = () => {
                 item={item}
                 index={index}
                 currency={currencySymbol}
+                isSavedCoinId={isSavedCoinId}
+                toggleSavedStatus={toggleSavedStatus}
               />
             ))}
         </tbody>

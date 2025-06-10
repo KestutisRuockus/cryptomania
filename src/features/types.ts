@@ -15,6 +15,8 @@ export type CryptoRowProps = {
   item: CryptoRowItemProps;
   index: number;
   currency: string;
+  isSavedCoinId: (id: string) => boolean;
+  toggleSavedStatus: (id: string) => void;
 };
 
 export type CoinListItem = {
