@@ -73,9 +73,22 @@ const CryptoList = () => {
       </table>
       {isSearching && <LoadingSpinner />}
       {loading && <LoadingSpinner />}
-      {!loading && !searchQuery && (
-        <Pagination page={page} setPage={setPage} hasMore={hasMore} />
-      )}
+      <div className="w-full flex justify-between gap-6 mt-6 items-center">
+        <p className="text-[var(--color-text-primary)] border-2 border-[var(--color-bg-primary)] bg-[var(--color-bg-secondary)] rounded-lg py-0.5 px-1.5">
+          Data Provided By{" "}
+          <a
+            href="https://www.coingecko.com/"
+            target="_blank"
+            style={{ fontSize: "var(--text-body-lg)" }}
+            className="text-[var(--color-text-secondary)] font-semibold"
+          >
+            CoinGecko
+          </a>
+        </p>
+        {!loading && !searchQuery && (
+          <Pagination page={page} setPage={setPage} hasMore={hasMore} />
+        )}
+      </div>
     </section>
   );
 };

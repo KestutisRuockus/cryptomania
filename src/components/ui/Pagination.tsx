@@ -2,6 +2,7 @@ import {
   FaRegArrowAltCircleLeft,
   FaRegArrowAltCircleRight,
 } from "react-icons/fa";
+import PerPage from "./PerPage";
 
 const PagesNumbersRow = ({
   page,
@@ -55,21 +56,11 @@ const Pagination = ({
   };
 
   return (
-    <div className="w-full flex flex-col sm:flex-row sm:justify-between items-end my-4">
-      <p className="text-[var(--color-text-primary)]">
-        Data Provided By{" "}
-        <a
-          href="https://www.coingecko.com/"
-          target="_blank"
-          style={{ fontSize: "var(--text-body-lg)" }}
-          className="text-[var(--color-text-secondary)] font-semibold"
-        >
-          CoinGecko
-        </a>
-      </p>
+    <div className="flex gap-6">
+      <PerPage />
       <div
         style={{ fontSize: "var(--text-body-lg)" }}
-        className="flex gap-2 items-center"
+        className="flex gap-2 items-center border-2 border-[var(--color-bg-primary)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] rounded-lg py-0.5 px-1.5"
       >
         <FaRegArrowAltCircleLeft
           onClick={loadPreviousPage}
