@@ -1,8 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { FilterBarContext } from "../context/FilterBarContext";
 
 export const useSavedCoins = () => {
   const [savedCoinsIds, setSavedCoinsIds] = useState<string[]>([]);
   const localStorageKey = import.meta.env.VITE_LOCAL_STORAGE_KEY;
+
+  const filterContext = useContext(FilterBarContext);
+  if (!filterContext) {
+    throw new Error(
+      "useFilterBarContext must be used within FilterBarProvider"
+    );
+  }
+  const { currency } = filterContext;
 
   useEffect(() => {
     const storedIds = localStorage.getItem(localStorageKey);
@@ -13,7 +22,7 @@ export const useSavedCoins = () => {
         console.error("Failed to parse starred IDs from localStorage:", error);
       }
     }
-  }, [localStorageKey]);
+  }, [localStorageKey, currency]);
 
   const isSavedCoinId = (id: string) => savedCoinsIds.includes(id);
 

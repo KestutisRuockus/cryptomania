@@ -35,9 +35,7 @@ const CryptoItem = ({
               toggleSavedStatus(item.id);
             }}
             className={`text-xl mr-4 cursor-pointer ${
-              isSavedCoinId(item.id)
-                ? "fill-[var(--color-text-hover)]"
-                : "fill-slate-500"
+              isSavedCoinId(item.id) ? "fill-yellow-400" : "fill-slate-600"
             } hover:fill-yellow-400 transition-colors duration-300`}
           />
         }

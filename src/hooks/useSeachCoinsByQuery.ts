@@ -20,7 +20,6 @@ const useSearchCoinsbyQuery = (searchQuery: string) => {
   const [isSearching, setIsSearching] = useState<boolean>(true);
   const [searchError, setSearchError] = useState<string | null>(null);
   const [noSearchResults, setNoSearchResults] = useState<boolean>(false);
-  const limitOfItemsperSearch = 10;
 
   const filterContext = useContext(FilterBarContext);
   if (!filterContext) {
@@ -50,18 +49,15 @@ const useSearchCoinsbyQuery = (searchQuery: string) => {
             },
           }
         );
-        const topCoins = searchresults.data.coins.slice(
-          0,
-          limitOfItemsperSearch
-        );
-
-        if (topCoins.length === 0) {
+        if (searchresults.data.coins === 0) {
           setCoinsListBySearchQuery([]);
           setNoSearchResults(true);
           setIsSearching(false);
           return;
         }
-        const ids = topCoins.map((coin: SearchResultCoin) => coin.id).join(",");
+        const ids = searchresults.data.coins
+          .map((coin: SearchResultCoin) => coin.id)
+          .join(",");
 
         const marketResults = await axios.get(
           `https://api.coingecko.com/api/v3/coins/markets`,

@@ -2,12 +2,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import { FaWindowClose } from "react-icons/fa";
 import { BsCopy } from "react-icons/bs";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { FaExternalLinkAlt, FaStar } from "react-icons/fa";
 import Chart from "./Chart";
 import useCoinbyId from "../../hooks/useCoinById";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
 import { useContext } from "react";
 import { FilterBarContext } from "../../context/FilterBarContext";
+import { useSavedCoins } from "../../hooks/useSavedCoins";
 
 const CryptoModal = () => {
   const { theme } = useTheme();
@@ -18,6 +19,7 @@ const CryptoModal = () => {
   const { id } = useParams();
   const safeId = id ?? "";
   const { coinData, loading } = useCoinbyId(safeId);
+  const { isSavedCoinId, toggleSavedStatus } = useSavedCoins();
 
   const filterContext = useContext(FilterBarContext);
   if (!filterContext) {
@@ -284,10 +286,20 @@ const CryptoModal = () => {
               </div>
             </div>
 
-            <FaWindowClose
-              onClick={closeModal}
-              className="absolute right-4 top-3 text-4xl text-[var(--color-bg-hover)] cursor-pointer hover:opacity-70 transition-opacity duration-300"
-            />
+            <div className="flex gap-2 absolute right-4 top-3 text-4xl text-[var(--color-bg-hover)]">
+              <FaStar
+                onClick={() => toggleSavedStatus(coinData.id)}
+                className={`${
+                  isSavedCoinId(coinData.id)
+                    ? "fill-yellow-400"
+                    : "fill-slate-600"
+                } cursor-pointer hover:opacity-70 transition-all duration-500`}
+              />
+              <FaWindowClose
+                onClick={closeModal}
+                className="cursor-pointer hover:opacity-70 transition-opacity duration-500"
+              />
+            </div>
           </>
         )}
       </div>
