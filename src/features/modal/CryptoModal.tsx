@@ -8,7 +8,7 @@ import useCoinbyId from "../../hooks/useCoinById";
 import LoadingSpinner from "../../components/ui/LoadingSpinner";
 import { useContext } from "react";
 import { FilterBarContext } from "../../context/FilterBarContext";
-import { useSavedCoins } from "../../hooks/useSavedCoins";
+import { useSavedCoinsStatus } from "../../hooks/useSavedCoinsStatus";
 
 const CryptoModal = () => {
   const { theme } = useTheme();
@@ -19,7 +19,7 @@ const CryptoModal = () => {
   const { id } = useParams();
   const safeId = id ?? "";
   const { coinData, loading } = useCoinbyId(safeId);
-  const { isSavedCoinId, toggleSavedStatus } = useSavedCoins();
+  const { isSavedCoinId, toggleSavedStatus } = useSavedCoinsStatus();
 
   const filterContext = useContext(FilterBarContext);
   if (!filterContext) {

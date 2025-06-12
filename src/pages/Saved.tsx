@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useSavedCoins } from "../hooks/useSavedCoins";
+import { useSavedCoinsStatus } from "../hooks/useSavedCoinsStatus";
 import type { CoinListItem } from "../features/types";
 import axios from "axios";
 import { FilterBarContext } from "../context/FilterBarContext";
@@ -8,7 +8,6 @@ import CryptoRow from "../features/components/CryptoRow";
 import { popularCurrencies } from "../data/currenciesList";
 
 const Saved = () => {
-  const { savedCoinsIds } = useSavedCoins();
   const [savedList, setSavedList] = useState<CoinListItem[] | []>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -22,7 +21,8 @@ const Saved = () => {
 
   const currencySymbol =
     popularCurrencies.find((item) => item.code === currency)?.symbol ?? "";
-  const { isSavedCoinId, toggleSavedStatus } = useSavedCoins();
+  const { savedCoinsIds, isSavedCoinId, toggleSavedStatus } =
+    useSavedCoinsStatus();
 
   const handleUnsave = (id: string) => {
     toggleSavedStatus(id);

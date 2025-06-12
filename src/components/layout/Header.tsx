@@ -16,8 +16,7 @@ const Header = () => {
       "useFilterBarContext must be used within FilterBarProvider"
     );
   }
-  const { setPage, setSearchQuery, page, searchQuery } = filterContext;
-  console.log(page, searchQuery);
+  const { setPage, setSearchQuery } = filterContext;
 
   const navigateAndResetContextValues = () => {
     setPage(1);
