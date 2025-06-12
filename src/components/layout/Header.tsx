@@ -3,24 +3,42 @@ import { navLinks } from "../../data/navLinks";
 import logo from "/logo.jpg";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaWindowClose } from "react-icons/fa";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import SwitchThemeButton from "../ui/SwitchThemeButton";
+import { FilterBarContext } from "../../context/FilterBarContext";
 
 const Header = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isNavbarOpen, setIsNavbarOpen] = useState<boolean>(false);
 
-  const toggleModalWindow = () => setIsModalOpen(!isModalOpen);
+  const filterContext = useContext(FilterBarContext);
+  if (!filterContext) {
+    throw new Error(
+      "useFilterBarContext must be used within FilterBarProvider"
+    );
+  }
+  const { setPage, setSearchQuery, page, searchQuery } = filterContext;
+  console.log(page, searchQuery);
+
+  const navigateAndResetContextValues = () => {
+    setPage(1);
+    setSearchQuery("");
+    toggleNavbarWindow();
+  };
+
+  const toggleNavbarWindow = () => {
+    setIsNavbarOpen(!isNavbarOpen);
+  };
 
   return (
     <header
       className="w-full flex justify-between items-center px-4"
       style={{ backgroundColor: "var(--color-bg-primary)" }}
     >
-      <img src={logo} alt="logo" className="w-16 z-20" />
+      <img src={logo} alt="logo" className="w-16 z-50" />
       <nav
-        className={`flex flex-col md:flex-row gap-2 md:gap-6 items-end md:items-center md:justify-end pr-24 md:px-6 w-4/5 md:w-fit py-12 md:p-2 absolute md:static ${
-          isModalOpen ? "top-0" : "top-[-100%]"
-        } right-[10%] transition-all duration-300 ease-in bg-[var(--color-bg-primary)] rounded-b-md md:rounded-md z-50`}
+        className={`flex flex-col md:flex-row gap-2 md:gap-6 items-end md:items-center md:justify-end pr-24 md:px-6 w-full md:w-fit py-12 md:p-2 absolute md:static ${
+          isNavbarOpen ? "top-0" : "top-[-100%]"
+        } right-0 transition-all duration-300 ease-in bg-[var(--color-bg-primary)] rounded-b-md md:rounded-md z-40`}
         style={{
           backgroundColor: "var(--color-bg-secondary)",
           fontSize: "var(--text-body-md)",
@@ -30,7 +48,7 @@ const Header = () => {
           <NavLink
             key={path}
             to={path}
-            onClick={toggleModalWindow}
+            onClick={navigateAndResetContextValues}
             className={({ isActive }) =>
               `
       ${isActive ? "bg-[var(--color-bg-primary)]" : ""}
@@ -48,11 +66,11 @@ const Header = () => {
         <SwitchThemeButton />
       </nav>
       <span
-        onClick={toggleModalWindow}
+        onClick={toggleNavbarWindow}
         className="md:hidden cursor-pointer hover:opacity-50 transition-opacity duration-300 ease-in text-3xl z-50"
         style={{ color: "var(--color-text-primary)" }}
       >
-        {isModalOpen ? <FaWindowClose /> : <GiHamburgerMenu />}
+        {isNavbarOpen ? <FaWindowClose /> : <GiHamburgerMenu />}
       </span>
     </header>
   );

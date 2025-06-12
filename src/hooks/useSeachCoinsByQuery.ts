@@ -39,16 +39,14 @@ const useSearchCoinsbyQuery = (searchQuery: string) => {
       setIsSearching(true);
       setSearchError(null);
       setNoSearchResults(false);
+      const url = import.meta.env.VITE_BASE_URL;
 
       try {
-        const searchresults = await axios.get(
-          "https://api.coingecko.com/api/v3/search",
-          {
-            params: {
-              query: searchQuery,
-            },
-          }
-        );
+        const searchresults = await axios.get(`${url}/search`, {
+          params: {
+            query: searchQuery,
+          },
+        });
         if (searchresults.data.coins === 0) {
           setCoinsListBySearchQuery([]);
           setNoSearchResults(true);
@@ -59,18 +57,15 @@ const useSearchCoinsbyQuery = (searchQuery: string) => {
           .map((coin: SearchResultCoin) => coin.id)
           .join(",");
 
-        const marketResults = await axios.get(
-          `https://api.coingecko.com/api/v3/coins/markets`,
-          {
-            params: {
-              vs_currency: currency,
-              ids,
-              order: "market_cap_desc",
-              sparkline: false,
-              price_change_percentage: "1h,24h,7d",
-            },
-          }
-        );
+        const marketResults = await axios.get(`${url}/coins/markets`, {
+          params: {
+            vs_currency: currency,
+            ids,
+            order: "market_cap_desc",
+            sparkline: false,
+            price_change_percentage: "1h,24h,7d",
+          },
+        });
 
         setCoinsListBySearchQuery(marketResults.data);
       } catch (error) {

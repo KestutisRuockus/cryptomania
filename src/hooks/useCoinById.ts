@@ -21,18 +21,16 @@ const useCoinbyId = (id: string) => {
     const fetchCoinById = async () => {
       setLoading(true);
       setError(null);
+      const url = import.meta.env.VITE_BASE_URL;
 
       try {
-        const result = await axios.get<CoinItemInModal>(
-          `https://api.coingecko.com/api/v3/coins/${id}`,
-          {
-            params: {
-              vs_currency: currency,
-              sparkline: false,
-              price_change_percentage: "1h,24h,7d",
-            },
-          }
-        );
+        const result = await axios.get<CoinItemInModal>(`${url}/coins/${id}`, {
+          params: {
+            vs_currency: currency,
+            sparkline: false,
+            price_change_percentage: "1h,24h,7d",
+          },
+        });
         setCoinData(result.data);
       } catch (error) {
         setError(`Failed to fetch coin by ID ( ${id} ). ${error}`);

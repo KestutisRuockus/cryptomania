@@ -11,16 +11,14 @@ const useTrendinigCoinsList = () => {
     const fetchTrendingCoins = async () => {
       setLoading(true);
       setError(null);
+      const url = import.meta.env.VITE_BASE_URL;
 
       try {
-        const result = await axios.get(
-          "https://api.coingecko.com/api/v3/search/trending",
-          {
-            params: {
-              order: "market_desc_cap",
-            },
-          }
-        );
+        const result = await axios.get(`${url}/search/trending`, {
+          params: {
+            order: "market_desc_cap",
+          },
+        });
         const extracted = result.data.coins.map(
           (entry: { item: TrendingCoin }) => entry.item
         );
